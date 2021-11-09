@@ -13,7 +13,7 @@ require 'active_support/core_ext/integer/time'
   Flight.create(
     departure_airport_id: rand(1..31),
     arrival_airport_id: rand(1..31),
-    departure_time: rand(2.months).seconds.from_now.to_s,
+    departure_time: rand(2.months).seconds.from_now,
     duration: rand(1..7)
   )
 end
