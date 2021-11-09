@@ -6,6 +6,15 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# Deletes all records and resets the ID count
+
+Airport.destroy_all
+Flight.destroy_all
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE airports RESTART IDENTITY CASCADE")
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE flights RESTART IDENTITY CASCADE")
+
+# Scans the db/seeds/*.rb seed files and executes them in order of number.
+
 Dir[Rails.root.join('db/seeds/*.rb')].sort.each do |file|
   puts "Processing #{file.split('/').last}"
   require file
