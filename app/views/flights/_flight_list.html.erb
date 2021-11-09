@@ -1,0 +1,12 @@
+<div>
+  <% flights.order(:departure_time).each do |flight| %>
+    <div>
+      <li>Flight from <%= flight.departure_airport.code %> to <%= flight.arrival_airport.code %>
+        <ul>
+          <li>Leaves <%= flight.departure_time.strftime("on %m-%d-%Y, at %H:%M") %></li>
+          <li>Estimated flight duration: <%= flight.duration%> hours. </li>
+        </ul>
+      </li>
+    </div>
+  <% end %>
+</div>
