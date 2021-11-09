@@ -5,6 +5,10 @@
         <ul>
           <li>Leaves <%= flight.departure_time.strftime("on %m-%d-%Y, at %H:%M") %></li>
           <li>Estimated flight duration: <%= flight.duration%> hours. </li>
+          <li>Currently seating: <%= flight.passenger_count%>/100 passengers </li>
+          <% if  flight.passenger_count >= 80 %>
+            <li>Act now! Only <%= 100 - flight.passenger_count%> seats left! </li>
+          <% end %>
         </ul>
       </li>
     </div>
