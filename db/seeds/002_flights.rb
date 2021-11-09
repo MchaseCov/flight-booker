@@ -14,6 +14,7 @@ require 'active_support/core_ext/integer/time'
     departure_airport_id: rand(1..31),
     arrival_airport_id: rand(1..31),
     departure_time: rand(2.months).seconds.from_now,
-    duration: rand(1..7)
+    duration: rand(1..7),
+    passenger_count: rand(1..99)
   )
 end
