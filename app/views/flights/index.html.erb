@@ -1,3 +1,8 @@
 <h1>List of all flights</h1>
-
-<%= render "flight_list", flights: @flights %>
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>
+<%= render "flight_search", flights: @flights, departing_ports: @departing_ports , arriving_ports: @arriving_ports %>
+<%= render "flight_list", flights: @flights_list %>

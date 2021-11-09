@@ -1,0 +1,13 @@
+<div class="flight-search">
+  <%= form_with url: flights_search_path, method: :get do |f| %>
+    <%= f.label :departure_code, "Departing from:" %>
+    <%= f.select :departure_code, options_for_select(departing_ports.sort, params[:departure_code]) %>
+    <%= f.label :arrival_code, "Arriving at:" %>
+    <%= f.select :arrival_code, options_for_select(arriving_ports.sort, params[:arrival_code]) %>
+    <%= f.label :flight_date, "Date of flight:" %>
+    <%= f.select :flight_date, options_from_collection_for_select(Flight.departure_dates.order(:departure_time), :departure_time, :departure_date_formatted, 1) %>
+    <%= f.label :user_passenger_count, "Amount of adult passengers:" %>
+    <%= f.select :user_passenger_count, options_for_select([['One', 1], ['Two', 2], ['Three', 3], ['Four', 4]], params[:user_passenger_count].to_i) %>
+    <%= f.submit "Filter flights!" %>
+  <% end %>
+</div>
