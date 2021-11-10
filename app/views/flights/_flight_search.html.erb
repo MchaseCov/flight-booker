@@ -1,9 +1,11 @@
 <div class="flight-search">
   <%= form_with url: flights_search_path, method: :get do |f| %>
     <%= f.label :departure_code, "Departing from:" %>
-    <%= f.select :departure_code, options_for_select(departing_ports.sort, params[:departure_code]) %>
+    <%= f.select :departure_code, options_for_select(departing_ports.map { |departing_port|
+    [departing_port.departure_airport.code, departing_port.departure_airport_id] }.uniq, 1), {}, { id: 'departure_select' } %>
     <%= f.label :arrival_code, "Arriving at:" %>
-    <%= f.select :arrival_code, options_for_select(arriving_ports.sort, params[:arrival_code]) %>
+    <%= f.select :arrival_code, options_for_select(arriving_ports.map { |arriving_port|
+    [arriving_port.arrival_airport.code, arriving_port.arrival_airport_id] }.uniq, 0), {}, { id: 'arrival_select' } %>
     <%= f.label :flight_date, "Date of flight:" %>
     <%= f.select :flight_date, options_from_collection_for_select(Flight.departure_dates.order(:departure_time), :departure_time, :departure_date_formatted, 1) %>
     <%= f.label :user_passenger_count, "Amount of adult passengers:" %>

@@ -4,5 +4,8 @@
     <%= msg %>
   </div>
 <% end %>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<%= javascript_pack_tag 'flights' %>
+<%= javascript_pack_tag 'test' %>
 <%= render "flight_search", flights: @flights, departing_ports: @departing_ports , arriving_ports: @arriving_ports %>
 <%= render "flight_list", flights: @flights_list %>

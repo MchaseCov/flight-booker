@@ -18,12 +18,19 @@ class FlightsController < ApplicationController
     end
   end
 
+  def update_airports
+    @arriving_ports = Flight.all.where("departure_airport_id = ?", params[:departure_airport_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def fetch_active_airports
-    @flights = Flight.all.includes(:departure_airport, :arrival_airport)
-    @departing_ports = @flights.map { |f| [f.departure_airport.code, f.departure_airport_id] }.uniq
-    @arriving_ports = @flights.map { |f| [f.arrival_airport.code, f.arrival_airport_id] }.uniq
+    @flights = Flight.all.includes(:departure_airport, :arrival_airport).distinct
+    @departing_ports = @flights
+    @arriving_ports = @flights.where("departure_airport_id = ?", Flight.first.departure_airport_id)
   end
 
   def fetch_search_parameters
