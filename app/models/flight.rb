@@ -30,4 +30,24 @@ class Flight < ApplicationRecord
     end
   end
 
+  def self.search_similar(departure_code, arrival_code, user_passenger_count)
+    if departure_code && arrival_code && user_passenger_count
+      Flight.where(
+        departure_airport: departure_code,
+        arrival_airport: arrival_code,
+        passenger_count: ...(100 - user_passenger_count)
+      )
+    else
+      Flight.all
+    end
+  end
+
+  # before_save :add_new_passengers_to_total
+
+  private
+
+  def add_new_passengers_to_total
+    total_passengers = :passenger_count # + ?
+    Flight.assign_attributes(passenger_count: total_passengers)
+  end
 end

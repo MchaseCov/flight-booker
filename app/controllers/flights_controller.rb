@@ -10,16 +10,19 @@ class FlightsController < ApplicationController
 
   def search
     if @flights_list.blank?
-      flash[:alert] = 'No flights found matching your choices, showing all flights!!'
-      redirect_to flights_path
+      fetch_similar_flights
+      if @similar_flights_list.blank?
+        redirect_to flights_path, alert: 'No flights found matching your choices, showing all flights.'
+      else
+        return_similar_fights
+      end
     else
-      flash_success_search
-      render 'index'
+      return_successful_search
     end
   end
 
   def update_airports
-    @arriving_ports = Flight.all.where("departure_airport_id = ?", params[:departure_airport_id])
+    @arriving_ports = Flight.all.where('departure_airport_id = ?', params[:departure_airport_id])
     respond_to do |format|
       format.js
     end
@@ -28,9 +31,9 @@ class FlightsController < ApplicationController
   private
 
   def fetch_active_airports
-    @flights = Flight.all.includes(:departure_airport, :arrival_airport).distinct
+    @flights = Flight.all.includes(:departure_airport, :arrival_airport)
     @departing_ports = @flights
-    @arriving_ports = @flights.where("departure_airport_id = ?", Flight.first.departure_airport_id)
+    @arriving_ports = @flights.where('departure_airport_id = ?', Flight.first.departure_airport_id)
   end
 
   def fetch_search_parameters
@@ -42,11 +45,28 @@ class FlightsController < ApplicationController
     )
   end
 
-  def flash_success_search
+  def fetch_similar_flights
+    @similar_flights_list = Flight.search_similar(
+      params[:departure_code],
+      params[:arrival_code],
+      params[:user_passenger_count].to_i
+    )
+  end
+
+  def return_successful_search
     flash.now[:notice] =
-      "Listing flights from #{@flights_list.first.departure_airport.code},
+      "Success! We found a flight
+      from #{@flights_list.first.departure_airport.code},
       to #{@flights_list.first.arrival_airport.code},
       On #{Date.parse(params[:flight_date]).strftime('%m-%d-%Y')},
       with room for #{params[:user_passenger_count]} passengers."
+    render 'index'
+  end
+
+  def return_similar_fights
+    flash.now[:alert] = 'No flights found matching your date, but we found flights on other dates.'
+    fetch_active_airports
+    @flights_list = @similar_flights_list
+    render 'index'
   end
 end
