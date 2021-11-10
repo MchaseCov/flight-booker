@@ -25,7 +25,7 @@ class FlightsController < ApplicationController
   # Limits arrival airport options to the respective departing airport's outgoing flights
   # Used along with packs/flights.js && views/flights/update_airports.js.erb
   def update_airports
-    @arriving_ports = Flight.all.where('departure_airport_id = ?', params[:departure_airport_id])
+    @arriving_ports = Flight.all.where('departure_airport_id = ?', params[:departure_airport_id]).uniq(&:arrival_airport_id)
     respond_to do |format|
       format.js
     end

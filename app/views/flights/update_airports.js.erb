@@ -1,4 +1,4 @@
 (function() {
-  $("#arrival_select").empty().append('<%= escape_javascript("#{render(:partial =>  "flights/arrival_airport_refresh", :locals => { :arriving_ports => @arriving_ports })}").html_safe %>');
+  $("#arrival_select").empty().append('<%= escape_javascript("#{render(:partial =>  "flights/arrival_airport_refresh", :collection => @arriving_ports )}").html_safe %>');
 
 }).call(this);

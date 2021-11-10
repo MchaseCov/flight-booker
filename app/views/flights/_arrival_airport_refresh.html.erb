@@ -1,3 +1,1 @@
-<% arriving_ports.uniq{|p| p.arrival_airport_id }.each do |port| %>
-  <option value="<%= port.arrival_airport_id %>"><%= port.arrival_airport.code %></option>
-<% end %>
+  <option value="<%= arrival_airport_refresh.arrival_airport_id %>"><%= arrival_airport_refresh.arrival_airport.code %></option>
