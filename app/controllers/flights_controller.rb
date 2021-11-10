@@ -3,11 +3,12 @@ class FlightsController < ApplicationController
   before_action :fetch_active_airports,
                 only: %i[index search],
                 unless: -> { params[:action] == 'search' && @flights_list.blank? }
-
+  # Index page
   def index
     @flights_list = @flights
   end
 
+  # Logic for determining the results of a search and returning the appropriate result
   def search
     if @flights_list.blank?
       fetch_similar_flights
@@ -21,6 +22,8 @@ class FlightsController < ApplicationController
     end
   end
 
+  # Limits arrival airport options to the respective departing airport's outgoing flights
+  # Used along with packs/flights.js && views/flights/update_airports.js.erb
   def update_airports
     @arriving_ports = Flight.all.where('departure_airport_id = ?', params[:departure_airport_id])
     respond_to do |format|
@@ -30,12 +33,14 @@ class FlightsController < ApplicationController
 
   private
 
+  # Fetches flights and airports associated them
   def fetch_active_airports
     @flights = Flight.all.includes(:departure_airport, :arrival_airport)
     @departing_ports = @flights
     @arriving_ports = @flights.where('departure_airport_id = ?', Flight.first.departure_airport_id)
   end
 
+  # Queries Flight for matching flight to params
   def fetch_search_parameters
     @flights_list = Flight.search(
       params[:departure_code],
@@ -45,6 +50,7 @@ class FlightsController < ApplicationController
     )
   end
 
+  # Queries Flight for matching flight to param, excluding flight_date
   def fetch_similar_flights
     @similar_flights_list = Flight.search_similar(
       params[:departure_code],
@@ -53,6 +59,7 @@ class FlightsController < ApplicationController
     )
   end
 
+  # Returns match upon successful search
   def return_successful_search
     flash.now[:notice] =
       "Success! We found a flight
@@ -63,6 +70,7 @@ class FlightsController < ApplicationController
     render 'index'
   end
 
+  # Returns match upon a successful similar search
   def return_similar_fights
     flash.now[:alert] = 'No flights found matching your date, but we found flights on other dates.'
     fetch_active_airports
