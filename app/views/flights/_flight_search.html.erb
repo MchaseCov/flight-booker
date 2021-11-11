@@ -4,8 +4,8 @@
     <%= f.select :departure_code, options_for_select(departing_ports.map { |departing_port|
     [departing_port.departure_airport.code, departing_port.departure_airport_id] }.uniq, flights.first.departure_airport_id), {}, { id: 'departure_select' } %>
     <%= f.label :arrival_code, "Arriving at:" %>
-    <%= f.select :arrival_code, options_for_select(arriving_ports.map { |arriving_port|
-    [arriving_port.arrival_airport.code, arriving_port.arrival_airport_id] }.uniq, 0), {}, { id: 'arrival_select' } %>
+    <%= f.select :arrival_code, options_for_select(arrival_airports.map { |arrival_airport|
+    [arrival_airport.arrival_airport.code, arrival_airport.arrival_airport_id] }.uniq, 0), {}, { id: 'arrival_select' } %>
     <%= f.label :flight_date, "Date of flight:" %>
     <%= f.select :flight_date, options_from_collection_for_select(Flight.departure_dates.order(:departure_time), :departure_time, :departure_date_formatted, 1) %>
     <%= f.label :user_passenger_count, "Amount of adult passengers:" %>
