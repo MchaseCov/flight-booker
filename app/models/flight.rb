@@ -22,7 +22,7 @@ class Flight < ApplicationRecord
     similar_flights = Flight.where(
       departure_airport: departure_search_input,
       arrival_airport: arrival_search_input,
-      passenger_count: ...(100 - tickets_search_input)
+      passenger_count: ..(100 - tickets_search_input)
     )
     if similar_flights.present?
       search_results_evaluation(similar_flights, date_search_input)

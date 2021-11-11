@@ -1,11 +1,9 @@
 <div class="flight-search">
   <%= form_with url: flights_search_path, method: :get do |f| %>
     <%= f.label :departure_search_input, "Departing from:" %>
-    <%= f.select :departure_search_input, options_for_select(depart_airports.map { |departing_airport|
-    [departing_airport.departure_airport.code, departing_airport.departure_airport_id] }, params[:departure_search_input]), {}, { id: 'departure_select' } %>
+    <%= f.select :departure_search_input, options_for_select(depart_airports, params[:departure_search_input]), {}, { id: 'departure_select' } %>
     <%= f.label :arrival_search_input, "Arriving at:" %>
-    <%= f.select :arrival_search_input, options_for_select(arrival_airports.map { |arrival_airport|
-    [arrival_airport.arrival_airport.code, arrival_airport.arrival_airport_id] }, params[:arrival_search_input]), {}, { id: 'arrival_select' } %>
+    <%= f.select :arrival_search_input, options_for_select(arrival_airports, params[:arrival_search_input]), {}, { id: 'arrival_select' } %>
     <%= f.label :date_search_input, "Date of flight:" %>
     <%= f.select :date_search_input, options_from_collection_for_select(Flight.departure_dates.order(:departure_time), :departure_time, :departure_date_formatted, params[:date_search_input]) %>
     <%= f.label :tickets_search_input, "Tickets needed:" %>
