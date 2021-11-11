@@ -18,22 +18,22 @@ class Flight < ApplicationRecord
   end
 
   # Searches based on user params. If results, will evaluate accuracy. Else, returns blank
-  def self.search(departure_code, arrival_code, flight_date, user_passenger_count)
+  def self.search(departure_search_input, arrival_search_input, date_search_input, tickets_search_input)
     similar_flights = Flight.where(
-      departure_airport: departure_code,
-      arrival_airport: arrival_code,
-      passenger_count: ...(100 - user_passenger_count)
+      departure_airport: departure_search_input,
+      arrival_airport: arrival_search_input,
+      passenger_count: ...(100 - tickets_search_input)
     )
     if similar_flights.present?
-      search_results_evaluation(similar_flights, flight_date)
+      search_results_evaluation(similar_flights, date_search_input)
     else
       similar_flights
     end
   end
 
   # Evaluates if the results are a match by date or not
-  def self.search_results_evaluation(similar_flights, flight_date)
-    matching_flight = similar_flights.where(departure_time: flight_date.beginning_of_day..flight_date.end_of_day)
+  def self.search_results_evaluation(similar_flights, date_search_input)
+    matching_flight = similar_flights.where(departure_time: date_search_input.beginning_of_day..date_search_input.end_of_day)
     if matching_flight.present?
       matching_flight_success_message(matching_flight)
     else
@@ -53,13 +53,14 @@ class Flight < ApplicationRecord
   # Passes semi-success message to controller along with resulting AR relation
   def self.similar_flights_success_message(similar_flights)
     [similar_flights, { notice:
-      "No flights found matching your date, but we found flights
+      "No flights found matching your date, but we found
+      #{ActionController::Base.helpers.pluralize(similar_flights.count, 'flight')}
       from #{similar_flights.first.departure_airport.code}
       to #{similar_flights.first.arrival_airport.code} on other dates." }]
   end
 
   private
-    
+
   def add_new_passengers_to_total
     total_passengers = :passenger_count # + ?
     Flight.assign_attributes(passenger_count: total_passengers)

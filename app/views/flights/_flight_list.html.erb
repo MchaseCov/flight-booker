@@ -1,5 +1,5 @@
 <div>
-  <% flights.order(:departure_time).each do |flight| %>
+  <% filtered_flights.order(:departure_time).each do |flight| %>
     <div>
       <li>Flight from <%= flight.departure_airport.code %> to <%= flight.arrival_airport.code %>
         <ul>

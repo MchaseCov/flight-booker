@@ -5,7 +5,7 @@ class FlightsController < ApplicationController
                 unless: -> { params[:action] == 'search' && @search_results.blank? }
   # Index page
   def index
-    @flights_list = @flights
+    @filtered_flights = @flights
   end
 
   # Logic for determining the results of a search and returning the appropriate result
@@ -32,18 +32,18 @@ class FlightsController < ApplicationController
   # Fetches flights and airports associated them
   def fetch_active_airports
     @flights = Flight.all.includes(:departure_airport, :arrival_airport)
-    @departing_ports = @flights
-    @arrival_airports = @flights.where(id: 1)
+    @depart_airports = @flights
+    @arrival_airports = @flights#.where(id: 1)
   end
 
   # Queries Flight with user params
   def fetch_search_parameters
     @search_results = Flight.search(
-      params[:departure_code],
-      params[:arrival_code],
-      Date.parse(params[:flight_date]),
-      params[:user_passenger_count].to_i
+      params[:departure_search_input],
+      params[:arrival_search_input],
+      Date.parse(params[:date_search_input]),
+      params[:tickets_search_input].to_i
     )
-    @flights_list = @search_results.first
+    @filtered_flights = @search_results.first
   end
 end

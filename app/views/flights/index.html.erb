@@ -6,6 +6,6 @@
 <% end %>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <%= javascript_pack_tag 'flights' %>
-<%= render "flight_search", flights: @flights, departing_ports: @departing_ports , arrival_airports: @arrival_airports %>
+<%= render "flight_search", flights: @flights, arrival_airports: @arrival_airports, depart_airports: @depart_airports %>
 <%= button_to "Reset all filters", flights_path, method: :get %>
-<%= render "flight_list", flights: @flights_list %>
+<%= render "flight_list", filtered_flights: @filtered_flights %>
