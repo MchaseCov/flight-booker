@@ -17,35 +17,49 @@ class Flight < ApplicationRecord
     departure_time.strftime('%m-%d-%Y')
   end
 
+  # Searches based on user params. If results, will evaluate accuracy. Else, returns blank
   def self.search(departure_code, arrival_code, flight_date, user_passenger_count)
-    if departure_code && arrival_code && flight_date && user_passenger_count
-      Flight.where(
-        departure_airport: departure_code,
-        arrival_airport: arrival_code,
-        departure_time: flight_date.beginning_of_day..flight_date.end_of_day,
-        passenger_count: ...(100 - user_passenger_count)
-      )
+    similar_flights = Flight.where(
+      departure_airport: departure_code,
+      arrival_airport: arrival_code,
+      passenger_count: ...(100 - user_passenger_count)
+    )
+    if similar_flights.present?
+      search_results_evaluation(similar_flights, flight_date)
     else
-      Flight.all
+      similar_flights
     end
   end
 
-  def self.search_similar(departure_code, arrival_code, user_passenger_count)
-    if departure_code && arrival_code && user_passenger_count
-      Flight.where(
-        departure_airport: departure_code,
-        arrival_airport: arrival_code,
-        passenger_count: ...(100 - user_passenger_count)
-      )
+  # Evaluates if the results are a match by date or not
+  def self.search_results_evaluation(similar_flights, flight_date)
+    matching_flight = similar_flights.where(departure_time: flight_date.beginning_of_day..flight_date.end_of_day)
+    if matching_flight.present?
+      matching_flight_success_message(matching_flight)
     else
-      Flight.all
+      similar_flights_success_message(similar_flights)
     end
   end
 
-  # before_save :add_new_passengers_to_total
+  # Passes success message to controller along with resulting AR relation
+  def self.matching_flight_success_message(matching_flight)
+    [matching_flight, { notice:
+      "Success! We found a flight from #{matching_flight.first.departure_airport.code}
+      to #{matching_flight.first.arrival_airport.code}
+      on #{matching_flight.first.departure_time.strftime('%m-%d-%Y')},
+      with room for #{100 - matching_flight.first.passenger_count} passengers." }]
+  end
+
+  # Passes semi-success message to controller along with resulting AR relation
+  def self.similar_flights_success_message(similar_flights)
+    [similar_flights, { notice:
+      "No flights found matching your date, but we found flights
+      from #{similar_flights.first.departure_airport.code}
+      to #{similar_flights.first.arrival_airport.code} on other dates." }]
+  end
 
   private
-
+    
   def add_new_passengers_to_total
     total_passengers = :passenger_count # + ?
     Flight.assign_attributes(passenger_count: total_passengers)
