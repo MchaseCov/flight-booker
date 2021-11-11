@@ -9,6 +9,7 @@
           <% if  flight.passenger_count >= 80 %>
             <li>Act now! Only <%= 100 - flight.passenger_count%> seats left! </li>
           <% end %>
+          <%= radio_button('flight', 'id', flight.id) %>
         </ul>
       </li>
     </div>
