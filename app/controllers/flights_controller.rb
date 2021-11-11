@@ -32,8 +32,8 @@ class FlightsController < ApplicationController
   # Fetches flights and airports associated them
   def fetch_active_airports
     @flights = Flight.all.includes(:departure_airport, :arrival_airport)
-    @depart_airports = @flights
-    @arrival_airports = @flights#.where(id: 1)
+    @depart_airports = @flights.uniq(&:departure_airport_id)
+    @arrival_airports = @flights.uniq(&:arrival_airport_id) # .where(id: 1) (Undecided)
   end
 
   # Queries Flight with user params
