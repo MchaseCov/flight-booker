@@ -10,7 +10,7 @@
             <li>Act now! Only <%= 100 - flight.passenger_count%> seats left! </li>
           <% end %>
           <%= form_with url: new_booking_path, method: :get do |f|%>
-            <%= f.hidden_field :flight_id, value: flight.id.to_i, id: "flight_#{flight.id}_hidden_field" %>
+            <%= f.hidden_field :flight_choice, value: flight.id.to_i, id: "flight_#{flight.id}_hidden_field" %>
             <%= f.hidden_field :passenger_count, value: (params[:tickets_search_input] || 1), id: "flight_#{flight.id}_passenger_hidden_field" %>
             <%= f.submit 'Proceed with this flight' %>
           <% end %>
