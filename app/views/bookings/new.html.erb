@@ -3,7 +3,7 @@
 <% arrival_airport = @flight_choice.arrival_airport.code %>
 <% departure_time = @flight_choice.departure_time.strftime("on %m-%d-%Y, at %H:%M") %>
 <% arrival_time = (@flight_choice.departure_time + @flight_choice.duration*60*60).strftime("%m-%d-%Y, at %H:%M") %>
-
+<% i = 0 %>
 <% flash.each do |type, msg| %>
   <div>
     <%= msg %>
@@ -18,14 +18,13 @@
 <li>(Flight will arrive on approximately <%= arrival_time %>)</li>
 
   <%= form_with model:[@flight_choice, @booking], local: true do |f| %>
-  <% @passenger_count.to_i.times do |i|%>
-    <h3><%=(i+1).ordinalize %> passenger's information:</h3>
       <%= f.fields_for :passengers do |p| %>
+        <% i+= 1 %>
+       <h3><%=(i).ordinalize %> passenger's information:</h3>
         <%= p.label :name %><br/>
         <%= p.text_field :name, autofocus: true, required: true %><br/>
         <%= p.label :email %><br/>
         <%= p.text_field :email, required: true %><br/>
-      <% end %>
   <% end %>
   <strong>Please review your flight details and passenger information before submitting</strong><br/>
   <%= f.submit "Purchase!" %>
