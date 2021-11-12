@@ -1,0 +1,10 @@
+placeholder page ok so like
+1) you have a flight
+2) its from <%= @booking.flight.departure_airport.code%> to <%= @booking.flight.arrival_airport.code%>
+3)its got people on it including:
+<% @booking.passengers.each do |p|%>
+person with name:<%= p.name %>
+. and their email is<%= p.email%>
+<% end %>
+
+yeah thats all :)
