@@ -17,7 +17,7 @@
 <li><%= departure_time %></li>
 <li>(Flight will arrive on approximately <%= arrival_time %>)</li>
 
-  <%= form_with model:@booking, local: true do |f| %>
+  <%= form_with model:[@flight_choice, @booking], local: true do |f| %>
   <% @passenger_count.to_i.times do |i|%>
     <h3><%=(i+1).ordinalize %> passenger's information:</h3>
       <%= f.fields_for :passengers do |p| %>
@@ -28,8 +28,5 @@
       <% end %>
   <% end %>
   <strong>Please review your flight details and passenger information before submitting</strong><br/>
-  <%= f.hidden_field :flight_id, value: @flight_choice.id.to_i %>
   <%= f.submit "Purchase!" %>
-  <%= hidden_field_tag :passenger_count, @passenger_count %>
-  <%= hidden_field_tag :flight_choice, @flight_choice.id.to_i %>
 <% end %>
