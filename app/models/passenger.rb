@@ -11,4 +11,5 @@ class Passenger < ApplicationRecord
 
   # Associations
   belongs_to :booking, inverse_of: :passengers
+  has_many :flights, through: :booking
 end
