@@ -1,4 +1,14 @@
 class Flight < ApplicationRecord
+  # Flight data structure
+  #
+  # id: :integer
+  # departure_airport_id: :integer
+  # arrival_airport_id: :integer
+  # departure_time: :datetime
+  # duration: :integer
+  # passenger_count: :integer
+  # timestamps: :integers
+
   # Validation
   validates :passenger_count, numericality: { less_than_or_equal_to: 100, only_integer: true }
 

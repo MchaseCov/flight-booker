@@ -1,4 +1,11 @@
 class Passenger < ApplicationRecord
+  # Passenger data structure
+  #
+  # id: :integer
+  # name: :string
+  # email: :string
+  # timestamps: :integers
+
   # Validations
 
   # Associations

@@ -1,4 +1,10 @@
 class Airport < ApplicationRecord
+  # Airport data structure
+  #
+  # id: :integer
+  # code: string
+  # timestamps: :integers
+
   # Associations
 
   has_many :departing_flights, foreign_key: :departure_airport_id, class_name: 'Flight', dependent: :destroy
