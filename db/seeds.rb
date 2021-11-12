@@ -10,9 +10,12 @@
 
 Airport.destroy_all
 Flight.destroy_all
+Booking.destroy_all
+Passenger.destroy_all
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE airports RESTART IDENTITY CASCADE")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE flights RESTART IDENTITY CASCADE")
-
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE bookings RESTART IDENTITY CASCADE")
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE passengers RESTART IDENTITY CASCADE")
 # Scans the db/seeds/*.rb seed files and executes them in order of number.
 
 Dir[Rails.root.join('db/seeds/*.rb')].sort.each do |file|
