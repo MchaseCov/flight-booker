@@ -1,21 +1,17 @@
 class BookingsController < ApplicationController
-  before_action :fetch_params, only: %i[new create]
+  before_action :set_booking_attributes, only: %i[new create]
 
   def new
-    @booking = Booking.new
-    @flight_choice = Flight.find(params[:flight_choice])
-    @passenger_count = params[:passenger_count].to_i
+    @booking = @flight_choice.bookings.new
     @passenger_count.times { @booking.passengers.build }
   end
 
   def create
-    @booking = Booking.new(booking_params)
+    @booking = @flight_choice.bookings.new(booking_params)
     if @booking.save
-      flash[:notice] = 'SUCCESS MESSAGE'
-      redirect_to @booking
+      redirect_to [@flight, @booking], notice: 'SUCCESS MESSAGE'
     else
-      flash.now[:alert] = @booking.errors.full_messages
-      render :new
+      render :new, alert: @booking.errors.full_messages
     end
   end
 
@@ -26,11 +22,11 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:flight_id, passengers_attributes: %I[id name email])
+    params.require(:booking).permit(passengers_attributes: %I[id name email])
   end
 
-  def fetch_params
-    @flight_choice = Flight.find(params[:flight_choice])
-    @passenger_count = params[:passenger_count].to_i
+  def set_booking_attributes
+    @flight_choice = Flight.find(params[:flight_id])
+    @passenger_count = params[:tickets].present? ? params[:tickets].to_i : booking_params.to_h.length
   end
 end
