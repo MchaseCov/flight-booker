@@ -70,11 +70,4 @@ class Flight < ApplicationRecord
       from #{similar_flights.first.departure_airport.code}
       to #{similar_flights.first.arrival_airport.code} on other dates." }]
   end
-
-  private
-
-  def add_new_passengers_to_total
-    total_passengers = :passenger_count # + ?
-    Flight.assign_attributes(passenger_count: total_passengers)
-  end
 end
