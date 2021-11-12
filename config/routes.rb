@@ -2,8 +2,7 @@ Rails.application.routes.draw do
   root to: 'flights#index'
 
   resources :flights, only: %i[index show]
-  resources :airports, only: %i[index]
-  resources :bookings, only: %i[new create]
+  resources :bookings, only: %i[new create show]
 
   get '/search/' => 'flights#search', :as => :flights_search
   get '/update_airports' => 'flights#update_airports', :as => :update_airports
