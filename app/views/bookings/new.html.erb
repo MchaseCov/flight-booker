@@ -1,19 +1,21 @@
 <h1>Creating a new booking, wow!</h1>
-<p>Debug notes: 
-  FLIGHT ID = <%= @flight_choice.id %>
-  FLIGHT DEPARTURE TIME = <%= @flight_choice.departure_time %>
-  TICKETS TO BUY = <%= @passenger_count %>
-  FLIGHT DURATION = <%= @flight_choice.duration %> HOURS
-</p>
-<li>Please review your purchase information:</li>
-  <li><%= pluralize(@passenger_count.to_i, 'ticket')%></li>
-  <li>From <%= @flight_choice.departure_airport.code %></li>
-  <li>To <%= @flight_choice.arrival_airport.code %></li>
-  <li><%= @flight_choice.departure_time.strftime("on %m-%d-%Y, at %H:%M") %></li>
-  <li>(Flight will arrive on approximately <%= (@flight_choice.departure_time + @flight_choice.duration*60*60).strftime("%m-%d-%Y, at %H:%M") %>)</li>
+<% departure_airport = @flight_choice.departure_airport.code %>
+<% arrival_airport = @flight_choice.arrival_airport.code %>
+<% departure_time = @flight_choice.departure_time.strftime("on %m-%d-%Y, at %H:%M") %>
+<% arrival_time = (@flight_choice.departure_time + @flight_choice.duration*60*60).strftime("%m-%d-%Y, at %H:%M") %>
 
-<%= form_with model:@user do |f| %>
-  <%= f.hidden_field :booked_flight_id, value: @flight_choice.id.to_i%>
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>
+
+<li>Please review your purchase information:</li>
+<li><%= pluralize(@passenger_count, 'ticket')%></li>
+<li>From <%= departure_airport %></li>
+<li>To <%= arrival_airport %></li>
+<li><%= departure_time %></li>
+<li>(Flight will arrive on approximately <%= arrival_time %>)</li>
 
   <% @passenger_count.to_i.times do |i|%>
     <h3><%=(i+1).ordinalize %> passenger's information:</h3>
