@@ -7,7 +7,7 @@ class Booking < ApplicationRecord
 
   # Callbacks
   after_commit :update_flight_passenger_total
-  after_destroy :restore_flight_passenger_total
+  after_destroy_commit :restore_flight_passenger_total
   # Validations
 
   # Associations
@@ -18,12 +18,14 @@ class Booking < ApplicationRecord
   # Methods
 
   def update_flight_passenger_total
-    total_passengers = flight.passenger_count + passengers.count
-    flight.assign_attributes(passenger_count: total_passengers)
+    f = Flight.find(self.flight_id)
+    f.passenger_count += self.passengers.count
+    f.save
   end
 
   def restore_flight_passenger_total
-    total_passengers = flight.passenger_count - passengers.count
-    flight.assign_attributes(passenger_count: total_passengers)
+    f = Flight.find(flight_id)
+    f.passenger_count -= passengers.count
+    f.save
   end
 end
