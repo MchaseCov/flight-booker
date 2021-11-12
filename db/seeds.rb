@@ -8,10 +8,6 @@
 
 # Deletes all records and resets the ID count
 
-Airport.destroy_all
-Flight.destroy_all
-Booking.destroy_all
-Passenger.destroy_all
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE airports RESTART IDENTITY CASCADE")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE flights RESTART IDENTITY CASCADE")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE bookings RESTART IDENTITY CASCADE")
