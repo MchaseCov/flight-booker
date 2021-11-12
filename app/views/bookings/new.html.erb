@@ -17,15 +17,19 @@
 <li><%= departure_time %></li>
 <li>(Flight will arrive on approximately <%= arrival_time %>)</li>
 
+  <%= form_with model:@booking, local: true do |f| %>
   <% @passenger_count.to_i.times do |i|%>
     <h3><%=(i+1).ordinalize %> passenger's information:</h3>
       <%= f.fields_for :passengers do |p| %>
-        <%= f.label :name %><br/>
-        <%= f.text_field :name, autofocus: true %><br/>
-        <%= f.label :email %><br/>
-        <%= f.text_field :email %><br/>
+        <%= p.label :name %><br/>
+        <%= p.text_field :name, autofocus: true, required: true %><br/>
+        <%= p.label :email %><br/>
+        <%= p.text_field :email, required: true %><br/>
       <% end %>
   <% end %>
   <strong>Please review your flight details and passenger information before submitting</strong><br/>
+  <%= f.hidden_field :flight_id, value: @flight_choice.id.to_i %>
   <%= f.submit "Purchase!" %>
+  <%= hidden_field_tag :passenger_count, @passenger_count %>
+  <%= hidden_field_tag :flight_choice, @flight_choice.id.to_i %>
 <% end %>
