@@ -4,6 +4,7 @@ class Passenger < ApplicationRecord
   # id: :integer
   # name: :string
   # email: :string
+  # booking_id: integer
   # timestamps: :integers
 
   # Validations
