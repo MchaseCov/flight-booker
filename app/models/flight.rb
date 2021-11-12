@@ -9,6 +9,10 @@ class Flight < ApplicationRecord
   # passenger_count: :integer
   # timestamps: :integers
 
+  # Scopes
+  scope :not_full, -> { where('passenger_count < 100') }
+  scope :with_airports, -> { includes(:departure_airport, :arrival_airport) }
+
   # Validation
   validates :passenger_count, numericality: { less_than_or_equal_to: 100, only_integer: true }
 
