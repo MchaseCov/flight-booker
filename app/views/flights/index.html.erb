@@ -7,13 +7,16 @@
   <%= javascript_pack_tag 'flights' %>
 </div>
 <div class="content-region">
-  <h1 class="title-text">FlightFinder <%= image_tag('bx-paper-plane.svg', class: 'logo-img')%></h1>
+  <div class="title-text">
+  <%= link_to "FlightFinder", flights_path, method: :get %><%= image_tag('bx-paper-plane.svg', class: 'logo-img')%>
+    </div>
     <div class="search-region">
       <%= render "flight_search", flights: @flights, arrival_airports: @arrival_airports, depart_airports: @depart_airports %>
     </div>
     <% flash.each do |type, msg| %>
-      <div>
+      <div class="flash flash-<%= type %>">
         <%= msg %>
+        <%= image_tag('bxs-error-circle', class: 'icon')%>
       </div>
     <% end %>
 </div>

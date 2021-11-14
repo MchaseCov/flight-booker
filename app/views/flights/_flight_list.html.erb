@@ -1,19 +1,25 @@
-<div>
-  <% filtered_flights.order(:departure_time).each do |flight| %>
-    <div>
-      <li>Flight from <%= flight.departure_airport.code %> to <%= flight.arrival_airport.code %>
-        <ul>
-          <li>Leaves <%= flight.departure_time.strftime("on %m-%d-%Y, at %H:%M") %></li>
-          <li>Estimated flight duration: <%= flight.duration%> hours. </li>
-          <li>Currently seating: <%= flight.passenger_count%>/100 passengers </li>
-          <meter min="0" max="100" low="50" high="85" optimum="0" value="<%= flight.passenger_count%>">
-          <progress max="100" value="<%= flight.passenger_count%>"><%= flight.passenger_count%></progress>
-          <% if  flight.passenger_count >= 80 %>
-            <li>Act now! Only <%= 100 - flight.passenger_count%> seats left! </li>
-          <% end %>
-            <%= link_to 'Proceed with this flight', [:new, flight, :booking, tickets: (params[:tickets_search_input] || 1)]  %>
-        </ul>
-      </li>
+<% filtered_flights.order(:departure_time).each do |flight| %>
+    <div class="flight-listing-box">
+      <div class="header-bar">
+        <h1><%= image_tag('bxs-plane-take-off.svg', class: 'icon')%><%= flight.departure_airport.code %>  🡒  <%= image_tag('bxs-plane-land.svg', class: 'icon')%><%= flight.arrival_airport.code %></h1>
+        <h2>$123.45 per ticket</h2>
+      </div>
+      <% if flight.passenger_count >= 80 %>
+        <div class="notice">
+          <h3>Act now! Only <%= 100 - flight.passenger_count%> seats left! </h3>
+        </div>
+      <% end %>
+      <div class="flight-card">
+        <div class="flight-info">
+          <h2><%= image_tag('bxs-calendar.svg', class: 'icon')%>Scheduled Departure: <%= flight.departure_time.strftime("%m-%d-%Y, at %H:%M") %></h2>
+          <h2><%= image_tag('bx-time.svg', class: 'icon')%>Estimated flight duration: <%= flight.duration%> hours. </h2>
+          <div class="seating">
+            <h2><%= image_tag('bx-user.svg', class: 'icon')%>Currently seating: <%= flight.passenger_count%>/100 passengers </h2>
+            <meter min="0" max="100" low="50" high="85" optimum="0" value="<%= flight.passenger_count%>"><%= flight.passenger_count%></meter>
+          </div>
+        </div>
+        <%= link_to "Buy #{pluralize((params[:tickets_search_input] || 1), 'ticket')} for this flight!", [:new, flight, :booking, tickets: (params[:tickets_search_input] || 1)], class: 'proceed' %>
+      </div>
     </div>
-  <% end %>
-</div>
+<% end %>
+

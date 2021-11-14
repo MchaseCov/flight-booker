@@ -52,6 +52,10 @@
   font-size: 3em;
   text-decoration: underline;
   flex: 55%;
+
+  a, a:hover, a:visited, a:active {
+    color: inherit;
+   }
 }
 
 
@@ -114,7 +118,7 @@ select{
 input{
   background-color: var(--lapis-lazuli);
   border-radius: 20px;
-  color: var(----mint-cream);
+  color: var(--mint-cream);
   border: none;
   text-align: center;
   text-decoration: none;
@@ -125,4 +129,125 @@ input:hover{
   color: var(--sandy-brown);
   outline: 3px solid var(--sandy-brown);
 }
+}
+
+.flight-listing-box{
+  border-radius: 15px;
+  width: 75vw;
+  background-color: var(--mint-cream);
+  margin: 1em;
+  color: var(--lapis-lazuli);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-right: 1em;
+
+  .header-bar{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    background-color: var(--copper);
+    padding-left: 1em;
+    color: var(--mint-cream);
+      h1{
+        font-size: 3em;
+        font-weight: 800;
+      }
+      h2{
+        margin-left: auto;
+        background-color: var(--sandy-brown);
+        color: var(--mint-cream);
+        width: 30%;
+        font-size: 3em;
+        text-align: center;
+        font-weight: 600;
+      }
+      .icon{
+        height: 1em;
+        filter:invert(100%);
+      }
+}
+  .notice{
+    background-color: rgb(255, 93, 93);
+    color: var(--mint-cream);
+    font-size: 1em;
+    font-weight: 600;
+    width: 75vw;
+    padding-left: 1em;
+  }
+
+  .flight-card{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  }
+
+  .flight-info{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+
+    h2{
+      font-weight: 400;
+    }
+
+    .icon{
+      height: 1em;
+      filter: invert(33%) sepia(27%) saturate(1709%) hue-rotate(175deg) brightness(95%) contrast(92%);
+    }
+    .seating{
+      display: flex;
+      width: 100%;
+      column-gap: 2em;
+    }
+    meter{
+      outline: none;
+      flex: 40%;
+      height: 30px;
+      border-radius: 3px;
+      max-width: 40%;
+    }
+  }
+  .proceed{
+  margin-left: auto;
+  width: 30%;
+  background-color: var(--lapis-lazuli);
+  border-radius: 20px;
+  color: var(--mint-cream);
+  text-align: center;
+  text-decoration: none;
+  font-size: 1em;
+  padding: 8px 16px;
+  }
+  .proceed:hover{
+    color: var(--sandy-brown);
+  }
+  }
+
+.flash{
+  font-weight: 500;
+  font-size: 1.5em;
+  text-align: center;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  align-self: center;
+  width: 100%;
+  padding-right: 10%;
+
+  .icon{
+    height: 2em;
+    filter:invert(100%);
+    margin-right: auto;
+    }
+}
+.flash-notice{
+  background-color: rgb(95, 194, 95);
+}
+.flash-alert{
+  background-color: rgb(255, 93, 93);
 }
