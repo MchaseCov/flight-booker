@@ -1,13 +1,33 @@
 <div class="flight-search">
-  <%= form_with url: flights_search_path, method: :get do |f| %>
-    <%= f.label :departure_search_input, "Departing from:" %>
-    <%= f.select :departure_search_input, options_for_select(depart_airports, params[:departure_search_input]), {}, { id: 'departure_select' } %>
-    <%= f.label :arrival_search_input, "Arriving at:" %>
-    <%= f.select :arrival_search_input, options_for_select(arrival_airports, params[:arrival_search_input]), {}, { id: 'arrival_select' } %>
-    <%= f.label :date_search_input, "Date of flight:" %>
-    <%= f.select :date_search_input, options_from_collection_for_select(Flight.departure_dates.order(:departure_time), :departure_time, :departure_date_formatted, params[:date_search_input]) %>
-    <%= f.label :tickets_search_input, "Tickets needed:" %>
-    <%= f.select :tickets_search_input, options_for_select([['One', 1], ['Two', 2], ['Three', 3], ['Four', 4]], params[:tickets_search_input].to_i) %>
-    <%= f.submit "Filter flights!" %>
-  <% end %>
+  <%= form_with url: flights_search_path, method: :get, class: 'form' do |f| %>
+    <div class="search-column">
+      <%= image_tag('bxs-plane-take-off.svg', class: 'icon')%>
+      <%= f.label :departure_search_input, "Departing from:" %> <br/>
+      <%= f.select :departure_search_input, options_for_select(depart_airports, params[:departure_search_input]), {}, { id: 'departure_select' } %>
+    </div>
+    <div class="search-column">
+      <%= image_tag('bxs-plane-land.svg', class: 'icon')%>
+      <%= f.label :arrival_search_input, "Arriving at:" %> <br/>
+      <%= f.select :arrival_search_input, options_for_select(arrival_airports, params[:arrival_search_input]), {}, { id: 'arrival_select' } %>
+    </div>
+    <div class="search-column">
+      <%= image_tag('bxs-calendar.svg', class: 'icon')%>   
+      <%= f.label :date_search_input, "Date of flight:" %> <br/>
+      <%= f.select :date_search_input, options_from_collection_for_select(Flight.departure_dates.order(:departure_time), :departure_time, :departure_date_formatted, params[:date_search_input]) %>
+    </div>
+    <div class="search-column">    
+      <%= image_tag('bx-body.svg', class: 'icon')%>
+      <%= f.label :tickets_search_input, "Tickets needed:" %> <br/>
+      <%= f.select :tickets_search_input, options_for_select([['One', 1], ['Two', 2], ['Three', 3], ['Four', 4]], params[:tickets_search_input].to_i) %>
+    </div>
 </div>
+</div>
+<div class="buttons">
+  <div class="search-button">
+    <%= f.submit "Filter flights!" %>
+    <% end %>
+  </div>
+  <div class="reset-button">
+    <%= button_to "Reset all filters", flights_path, method: :get %>
+  </div>
+
