@@ -1,0 +1,13 @@
+<% i = 0 %>
+<%= form_with model:[@flight_choice, @booking], local: true do |f| %>
+  <%= f.fields_for :passengers do |p| %>
+    <% i+= 1 %>
+    <h3><%=(i).ordinalize %> passenger's information:</h3>
+    <%= p.label :name %><br/>
+    <%= p.text_field :name, autofocus: true, required: true %><br/>
+    <%= p.label :email %><br/>
+    <%= p.text_field :email, required: true %><br/>
+  <% end %>
+  <strong>Please review your flight details and passenger information before submitting</strong><br/>
+  <%= f.submit "Purchase!" %>
+<% end %>
