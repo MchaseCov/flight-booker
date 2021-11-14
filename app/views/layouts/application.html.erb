@@ -5,12 +5,25 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
-  <body>
-    <%= yield %>
-  </body>
+  <div class="site-grid">
+    <header class="header">
+      <div>
+        <%= render "layouts/header" %>
+      </div>
+    </header>
+    <body>
+      <div class="banner">
+        <%= yield :banner %>
+      </div>
+      <div class="content">
+        <%= yield :content%>
+      </div>
+    </body>
+  </div>
 </html>
