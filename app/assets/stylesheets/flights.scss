@@ -1,3 +1,128 @@
 // Place all the styles related to the Flights controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.banner{
+  grid-area: banner;
+  justify-self: stretch; 
+  position: relative;
+
+.image-parent{
+  overflow: hidden;
+  max-height: 100%;
+  min-width: 100%;
+}
+
+.banner-image{
+  min-width: 100%;
+  display: block;
+  transform: translateY(-35%);
+  filter:blur(3px)
+}
+
+.content-region{
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  top: 0%;
+  left: 50%;
+  transform: translateX(-50%);
+  row-gap: 0px;
+  column-gap: 0px;
+  align-items: flex-start;
+  color: var(--mint-cream);
+}
+
+.search-region{
+  top: 5em;
+  background-color: var(--lapis-lazuli);
+  border-radius: 30px;
+  text-align: center;
+  padding-top: .5em;
+  padding-bottom: .5em;
+  flex: 100%;
+  height: 45%;
+}
+
+.title-text{
+  color: var(--lapis-lazuli);
+  font-weight: 800;
+  font-size: 3em;
+  text-decoration: underline;
+  flex: 55%;
+}
+
+
+}
+
+.flight-search{
+  display: flex;
+  height: 100%;
+  font-size: 1.25em;
+  font-weight: 700;
+
+.search-column{
+  flex: 25%; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search-column:hover{
+  .icon{
+    filter: invert(79%) sepia(14%) saturate(4239%) hue-rotate(323deg) brightness(102%) contrast(89%);
+  }
+  color: var(--sandy-brown);
+  select{
+    box-shadow:0px 0px 0px 2px var(--sandy-brown) inset;
+  }
+
+}
+.form{
+  display: contents;
+}
+
+.icon{
+  flex:.75;
+  filter:invert(100%);
+}
+
+select{
+  font-size: 1em;
+  font-weight: 300;
+}
+
+}
+
+.buttons
+{
+  align-items: center;
+  flex: 100%;
+  text-align: center;
+  display: flex;
+
+.search-button{
+  flex: 50%;
+}
+
+.reset-button{
+  flex: 50%
+}
+input{
+  background-color: var(--lapis-lazuli);
+  border-radius: 20px;
+  color: var(----mint-cream);
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  font-size: 2em;
+  padding: 8px 16px;
+}
+input:hover{
+  color: var(--sandy-brown);
+  outline: 3px solid var(--sandy-brown);
+}
+}
