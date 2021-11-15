@@ -13,7 +13,7 @@
         <div class="flight-info">
           <h2><%= image_tag('bxs-calendar.svg', class: 'icon')%>Scheduled Departure: <%= flight.departure_time.strftime("%m-%d-%Y, at %H:%M") %></h2>
           <h2><%= image_tag('bx-time.svg', class: 'icon')%>Estimated flight duration: <%= flight.duration%> hours. </h2>
-          <div class="seating">
+          <div class="row">
             <h2><%= image_tag('bx-user.svg', class: 'icon')%>Currently seating: <%= flight.passenger_count%>/100 passengers </h2>
             <meter min="0" max="100" low="50" high="85" optimum="0" value="<%= flight.passenger_count%>"><%= flight.passenger_count%></meter>
           </div>
