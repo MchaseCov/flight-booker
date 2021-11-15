@@ -12,3 +12,15 @@ A typical airline booking flow:
 - Choose from among a list of available flights
 - Enter passenger information for all passengers
 - Enter billing information
+
+### Asset credit
+
+Banner images:
+
+[Photo by Pixabay from Pexels](https://www.pexels.com/photo/white-ford-e150-near-fiat-doblo-under-a-cloudy-sky-163771/)
+
+[Photo by Andrea Piacquadio from Pexels](https://www.pexels.com/photo/man-in-brown-robe-carrying-bag-smiling-837129/)
+
+Icons:
+
+https://boxicons.com/
