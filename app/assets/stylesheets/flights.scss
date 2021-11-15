@@ -10,19 +10,27 @@
   overflow: hidden;
   max-height: 100%;
   min-width: 100%;
+  background-color: var(--mint-cream);
 }
 
 .banner-image{
   min-width: 100%;
   display: block;
+}
+.b1{
   transform: translateY(-35%);
-  filter:blur(3px)
+  filter:blur(3px) opacity(50%)
+}
+.b2{
+  width: 100%;
+  transform: translateY(-70%);
+  filter:blur(3px) opacity(50%);
 }
 
 .content-region{
   position: absolute;
   height: 100%;
-  width: 50%;
+  width: 70%;
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;
@@ -189,19 +197,30 @@ input:hover{
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-
+    
     h2{
       font-weight: 400;
     }
-
+    label{
+      display: block;
+      font-size: 1.5em;
+      font-weight: 400;
+      padding-left: 1em;
+    }
     .icon{
       height: 1em;
       filter: invert(33%) sepia(27%) saturate(1709%) hue-rotate(175deg) brightness(95%) contrast(92%);
     }
-    .seating{
+    .row{
       display: flex;
       width: 100%;
       column-gap: 2em;
+    }
+    .form-row{
+      display: flex;
+      width: 60%;
+      column-gap: 2em;
+      row-gap: 1em;
     }
     meter{
       outline: none;
@@ -209,6 +228,23 @@ input:hover{
       height: 30px;
       border-radius: 3px;
       max-width: 40%;
+    }
+    input{
+      outline: none;
+      flex: 50%;
+      height: 30px;
+      border-radius: 3px;
+      max-width: 40%;
+      background-repeat: no-repeat;
+      padding-left: 40px;
+      margin-bottom: 5px;
+      margin-top: 5px
+    }
+    .name{
+      background-image: url(bx-user.svg);
+    }
+    .email{
+      background-image: url(bx-mail-send.svg);
     }
   }
   .proceed{
@@ -225,7 +261,7 @@ input:hover{
   .proceed:hover{
     color: var(--sandy-brown);
   }
-  }
+}
 
 .flash{
   font-weight: 500;
@@ -251,3 +287,39 @@ input:hover{
 .flash-alert{
   background-color: rgb(255, 93, 93);
 }
+.purchase{
+  margin-left: auto;
+  width: 30%;
+  background-color: var(--lapis-lazuli);
+  border-radius: 20px;
+  color: var(--mint-cream);
+  text-align: center;
+  text-decoration: none;
+  font-size: 2em;
+  padding: 8px 16px;
+  }
+  .purchase:hover{
+    color: var(--sandy-brown);
+  }
+
+  .seating-info{
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: auto;
+    width: 30%;
+    h2{
+      font-weight: 400;
+    }
+    .icon{
+      height: 1em;
+      filter: invert(33%) sepia(27%) saturate(1709%) hue-rotate(175deg) brightness(95%) contrast(92%);
+    }
+    .row{
+      display: flex;
+      width: 100%;
+      column-gap: 2em;
+      text-align: right;
+    }
+  }

@@ -1,19 +1,22 @@
-<h1>Creating a new booking, wow!</h1>
-<% departure_airport = @flight_choice.departure_airport.code %>
-<% arrival_airport = @flight_choice.arrival_airport.code %>
-<% departure_time = @flight_choice.departure_time.strftime("on %m-%d-%Y, at %H:%M") %>
-<% arrival_time = (@flight_choice.departure_time + @flight_choice.duration*60*60).strftime("%m-%d-%Y, at %H:%M") %>
-<% flash.each do |type, msg| %>
-  <div>
-    <%= msg %>
+<% content_for :banner do %>
+<div class="image-parent">
+  <%= image_tag('pexels-andrea-piacquadio-837129.jpg', class: 'banner-image b2')%>
+</div>
+<div class="content-region">
+  <div class="title-text">
+    <%= link_to "FlightFinder", flights_path, method: :get %><%= image_tag('bx-paper-plane.svg', class: 'logo-img')%>
   </div>
+  <div class="search-region">
+    <%= render "booking_info", departure_airport: @departure_airport, arrival_airport: @arrival_airport, departure_time: @departure_time, arrival_time: @arrival_time, passenger_count: @passenger_count%>
+  </div>
+  <% flash.each do |type, msg| %>
+    <div class="flash flash-<%= type %>">
+      <%= msg %>
+      <%= image_tag('bxs-error-circle', class: 'icon')%>
+    </div>
+  <% end %>
+</div>
 <% end %>
-
-<li>Please review your purchase information:</li>
-<li><%= pluralize(@passenger_count, 'ticket')%></li>
-<li>From <%= departure_airport %></li>
-<li>To <%= arrival_airport %></li>
-<li><%= departure_time %></li>
-<li>(Flight will arrive on approximately <%= arrival_time %>)</li>
-
-<%= render "form", flight_choice: @flight_choice, booking: @booking %>
+<% content_for :content do %>
+  <%= render "form", flight_choice: @flight_choice, booking: @booking %>
+<% end %>

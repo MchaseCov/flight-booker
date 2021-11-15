@@ -1,0 +1,32 @@
+<div class="flight-search">
+    <div class="search-column">
+      <%= image_tag('bxs-plane-take-off.svg', class: 'icon')%>
+      <h2>Departing from:</h2>
+      <p><%= departure_airport %></p>
+    </div>
+    <div class="search-column">
+      <%= image_tag('bxs-plane-land.svg', class: 'icon')%>
+      <h2>Arriving at:</h2>
+      <p><%= arrival_airport %></p>
+    </div>
+    <div class="search-column">
+      <%= image_tag('bxs-calendar.svg', class: 'icon')%>   
+      <h2>Date of flight:</h2>
+      <p><%= departure_time %></p>
+    </div>
+    <div class="search-column">
+      <%= image_tag('bxs-timer.svg', class: 'icon')%>  
+      <h2>Estimated arrival:</h2>
+      <p><%= arrival_time %></p>
+    </div>
+    <div class="search-column">    
+      <%= image_tag('bx-body.svg', class: 'icon')%>
+      <h2>Tickets needed:</h2>
+      <p><%= pluralize(passenger_count, 'ticket')%></p>
+    </div>
+</div>
+</div>
+<div class="buttons">
+  <div class="reset-button">
+    <%= button_to "Back to all flights", flights_path, method: :get %>
+  </div>
