@@ -1,0 +1,41 @@
+<% i = 0 %>
+  <% booking.passengers.each do |passenger| %>
+  <% i+= 1 %>
+  <div class="flight-listing-box">
+    <div class="header-bar">
+      <h1><%= image_tag('bxs-cart-add.svg', class: 'icon')%><%=(i).ordinalize %> Passenger's Information:</h1>
+      <h2>Seating Info</h2>
+    </div>
+    <div class="flight-card">
+      <div class="flight-info">
+        <div class="form-row">
+          <h2>Passenger name:</h2><br/>
+          <h2><%= passenger.name %></h2><br/>
+        </div>
+        <div class="form-row">
+          <h2>Passenger email:</h2><br/>
+          <h2><%= passenger.email %></h2><br/>
+        </div>
+      </div>
+      <div class="seating-info">
+        <div class="row">
+          <h2><%= image_tag('bx-body.svg', class: 'icon')%>Seat number: ##<%=i%></h2>
+        </div>
+        <div class="row">
+          <h2><%= image_tag('bx-wifi.svg', class: 'icon')%>Free Wi-Fi Included</h2>
+        </div>
+        <div class="row">
+          <h2><%= image_tag('bx-food-menu.svg', class: 'icon')%>On-Board Dining Available</h2>
+        </div>
+        <div class="row">
+          <h2><%= image_tag('bx-tv.svg', class: 'icon')%>In-Flight Entertainment</h2>
+        </div>
+        <% if i == 1 ||i == 4%>
+        <div class="row">
+          <h2><%= image_tag('bx-buildings.svg', class: 'icon')%>Window Seating</h2>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,10 +1,22 @@
-placeholder page ok so like
-1) you have a flight
-2) its from <%= @booking.flight.departure_airport.code%> to <%= @booking.flight.arrival_airport.code%>
-3)its got people on it including:
-<% @booking.passengers.each do |p|%>
-person with name:<%= p.name %>
-. and their email is<%= p.email%>
+<% content_for :banner do %>
+<div class="image-parent">
+  <%= image_tag('pexels-andrea-piacquadio-837129.jpg', class: 'banner-image b2')%>
+</div>
+<div class="content-region">
+  <div class="title-text">
+    <%= link_to "FlightFinder", flights_path, method: :get %><%= image_tag('bx-paper-plane.svg', class: 'logo-img')%>
+  </div>
+  <div class="search-region">
+    <%= render "booking_info", departure_airport: @departure_airport, arrival_airport: @arrival_airport, departure_time: @departure_time, arrival_time: @arrival_time, passenger_count: @passenger_count%>
+  </div>
+  <% flash.each do |type, msg| %>
+    <div class="flash flash-<%= type %>">
+      <%= msg %>
+      <%= image_tag('bxs-error-circle', class: 'icon')%>
+    </div>
+  <% end %>
+</div>
 <% end %>
-
-yeah thats all :)
+<% content_for :content do %>
+  <%= render "booked_passengers", booking: @booking %>
+<% end %>
