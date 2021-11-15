@@ -5,6 +5,8 @@
   grid-area: banner;
   justify-self: stretch; 
   position: relative;
+  border-bottom: 3px solid var(--van-dyke-brown);
+  margin-bottom: -3px;
 
 .image-parent{
   overflow: hidden;
