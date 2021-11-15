@@ -9,7 +9,7 @@
 
 require 'active_support/core_ext/integer/time'
 
-25.times do
+50.times do
   Flight.create(
     departure_airport_id: rand(1..31),
     arrival_airport_id: rand(1..31),
