@@ -7,7 +7,6 @@
 //= require jquery_ujs
 // require turbolinks
 //= require_tree .
-global.$ = require('jquery'), require('jquery-ui'), require('jquery-blockui')
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
