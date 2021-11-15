@@ -38,6 +38,7 @@ class FlightsController < ApplicationController
     @arrival_airports = @flights.map { |arrival_airport|
       [arrival_airport.arrival_airport.code, arrival_airport.arrival_airport_id]
     }.uniq
+    @dates = Flight.unique_dates
   end
 
   # Queries Flight with user params
@@ -45,7 +46,7 @@ class FlightsController < ApplicationController
     @search_results = Flight.search(
       params[:departure_search_input],
       params[:arrival_search_input],
-      Date.parse(params[:date_search_input]),
+      Date.strptime(params[:date_search_input], '%m-%d-%Y'),
       params[:tickets_search_input].to_i
     )
     @filtered_flights = @search_results.first

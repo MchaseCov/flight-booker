@@ -13,7 +13,7 @@
     <div class="search-column">
       <%= image_tag('bxs-calendar.svg', class: 'icon')%>   
       <%= f.label :date_search_input, "Date of flight:" %> <br/>
-      <%= f.select :date_search_input, options_from_collection_for_select(Flight.departure_dates.order(:departure_time), :departure_time, :departure_date_formatted, params[:date_search_input]) %>
+      <%= f.select :date_search_input, options_for_select(dates, params[:date_search_input]) %>
     </div>
     <div class="search-column">    
       <%= image_tag('bx-body.svg', class: 'icon')%>

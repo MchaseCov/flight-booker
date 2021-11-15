@@ -11,7 +11,7 @@
   <%= link_to "FlightFinder", flights_path, method: :get %><%= image_tag('bx-paper-plane.svg', class: 'logo-img')%>
     </div>
     <div class="search-region">
-      <%= render "flight_search", flights: @flights, arrival_airports: @arrival_airports, depart_airports: @depart_airports %>
+      <%= render "flight_search", dates: @dates, arrival_airports: @arrival_airports, depart_airports: @depart_airports %>
     </div>
     <% flash.each do |type, msg| %>
       <div class="flash flash-<%= type %>">

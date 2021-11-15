@@ -26,11 +26,15 @@ class Flight < ApplicationRecord
   # Methods
 
   def self.departure_dates
-    Flight.select(:departure_time)
+    Flight.select(:departure_time).order(:departure_time)
   end
 
-  def departure_date_formatted
+  def departure_date_format
     departure_time.strftime('%m-%d-%Y')
+  end
+
+  def self.unique_dates
+    departure_dates.map(&:departure_date_format).uniq.map { |d| [d, d] }
   end
 
   # Searches based on user params. If results, will evaluate accuracy. Else, returns blank
