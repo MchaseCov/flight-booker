@@ -4,12 +4,17 @@ class BookingsController < ApplicationController
   def new
     @booking = @flight_choice.bookings.new
     @passenger_count.times { @booking.passengers.build }
+    @departure_airport = @flight_choice.departure_airport.code
+    @arrival_airport = @flight_choice.arrival_airport.code
+    @departure_time = @flight_choice.departure_time.strftime('on %m-%d-%Y, at %H:%M')
+    @arrival_time = (@flight_choice.departure_time + @flight_choice.duration * 60 * 60)
+                    .strftime('on %m-%d-%Y, at %H:%M')
   end
 
   def create
     @booking = @flight_choice.bookings.new(booking_params)
     if @booking.save
-      redirect_to [@flight, @booking], notice: 'SUCCESS MESSAGE'
+      redirect_to [@flight, @booking], notice: 'Signed you up!'
     else
       render :new, alert: @booking.errors.full_messages
     end
