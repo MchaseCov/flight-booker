@@ -22,5 +22,9 @@
 </div>
   <% end %>
 <% content_for :content do %>
+  <% if @filtered_flights.empty? %>
+  <%= render "greeting" %>
+  <% else %>
   <%= render "flight_list", filtered_flights: @filtered_flights %>
+<% end %>
 <% end %>

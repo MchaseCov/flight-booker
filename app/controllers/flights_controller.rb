@@ -3,17 +3,17 @@ class FlightsController < ApplicationController
   before_action :fetch_active_airports,
                 only: %i[index search],
                 unless: -> { params[:action] == 'search' && @search_results.blank? }
-  # Index page
+  # Index page. Change number to flights you want to display by default (in order of date)
   def index
-    @filtered_flights = @flights
+    @filtered_flights = @flights.limit(0)
   end
 
   # Logic for determining the results of a search and returning the appropriate result
   def search
     if @search_results.blank?
-      redirect_to flights_path, alert: 'No flights found matching your choices, showing all flights.'
+      redirect_to flights_path, alert: 'Sorry! No flights found matching your airport choices!'
     else
-      flash[:notice] = @search_results.last[:notice]
+      flash.now[:notice] = @search_results.last[:notice]
       render 'index'
     end
   end
