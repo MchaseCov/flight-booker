@@ -245,10 +245,10 @@ input:hover{
       margin-top: 5px
     }
     .name{
-      background-image: url(bx-user.svg);
+      background-image: image-url("bx-user.svg");
     }
     .email{
-      background-image: url(bx-mail-send.svg);
+      background-image: image-url("bx-mail-send.svg");
     }
   }
   .proceed{

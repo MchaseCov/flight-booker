@@ -31,7 +31,7 @@
       rgba(38, 96, 164, .25), 
       rgba(241, 153, 83, 0.5)
     ),
-  url(weather.png);
+  image-url("weather.png");
   min-height: 100%;
 }
 
