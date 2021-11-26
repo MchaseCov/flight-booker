@@ -10,7 +10,10 @@ class BookingsController < ApplicationController
   def create
     @booking = @flight_choice.bookings.new(booking_params)
     if @booking.save
-      redirect_to [@flight, @booking], notice: 'Your flight is booked! Here is the info. A reciept has (not) been emailed to you!'
+      @booking.passengers.each do |passenger|
+        PassengerMailer.booking_confirmation_email(passenger, @booking, @flight_choice).deliver_now!
+      end
+      redirect_to [@flight, @booking], notice: 'Flight successfully booked! A confirmation email has been sent to each passenger!'
     else
       render :new, alert: @booking.errors.full_messages
     end
