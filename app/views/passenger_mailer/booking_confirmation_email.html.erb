@@ -1,0 +1,8 @@
+<h1>This email is a confirmation for your FlightFinder booking!</h1>
+<p>Hello <%= @passenger.name.capitalize %>,</p>
+<p>
+  Your flight is on <%= @flight.departure_time.strftime("%m-%d-%Y, at %H:%M")%> GMT. Your flight will depart from <%= @flight.departure_airport.code %> airport and arrive at <%= @flight.arrival_airport.code %> airport.
+</p>
+<p>To see more details about your flight, including seating information, please <a href="<%= @url %>">click here!</a></p>
+
+<p>Thank you for signing up with FlightFinder!</p>
